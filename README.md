@@ -1,6 +1,6 @@
 # Everything Codex Code
 
-Codex-first configuration pack converted from `everything-claude-code`.
+Codex-first configuration pack for `everything-codex-code`.
 
 Includes:
 

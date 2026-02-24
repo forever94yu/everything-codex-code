@@ -1,6 +1,6 @@
 # Everything Codex Code（中文）
 
-这是从 `everything-claude-code` 改造的 **Codex 专用版本**。
+这是 `everything-codex-code` 的 **Codex 专用版本**。
 
 包含内容：
 

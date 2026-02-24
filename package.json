@@ -23,11 +23,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-github-username/everything-codex-code.git"
+    "url": "git+https://github.com/forever94yu/everything-codex-code.git"
   },
-  "homepage": "https://github.com/your-github-username/everything-codex-code#readme",
+  "homepage": "https://github.com/forever94yu/everything-codex-code#readme",
   "bugs": {
-    "url": "https://github.com/your-github-username/everything-codex-code/issues"
+    "url": "https://github.com/forever94yu/everything-codex-code/issues"
   },
   "files": [
     ".codex/",

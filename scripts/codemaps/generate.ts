@@ -2,7 +2,7 @@
 /**
  * scripts/codemaps/generate.ts
  *
- * Codemap Generator for everything-claude-code (ECC)
+ * Codemap Generator for everything-codex-code (ECC)
  *
  * Scans the current working directory and generates architectural
  * codemap documentation under docs/CODEMAPS/ as specified by the
