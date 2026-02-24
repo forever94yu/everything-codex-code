@@ -1,6 +1,6 @@
-# Example Project CLAUDE.md
+﻿# Example Project AGENTS.md
 
-This is an example project-level CLAUDE.md file. Place this in your project root.
+This is an example project-level AGENTS.md file. Place this in your project root.
 
 ## Project Overview
 
@@ -98,3 +98,4 @@ DEBUG=false
 - Never commit to main directly
 - PRs require review
 - All tests must pass before merge
+

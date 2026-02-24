@@ -1,5 +1,5 @@
 /**
- * Cross-platform utility functions for Claude Code hooks and scripts.
+ * Cross-platform utility functions for Codex/Claude hooks and scripts.
  * Works on Windows, macOS, and Linux.
  */
 
@@ -15,13 +15,16 @@ export const isLinux: boolean;
 /** Get the user's home directory (cross-platform) */
 export function getHomeDir(): string;
 
-/** Get the Claude config directory (~/.claude) */
-export function getClaudeDir(): string;
+/** Resolve active config directory (prefers Codex, falls back to Claude) */
+export function getConfigDir(): string;
 
-/** Get the sessions directory (~/.claude/sessions) */
+/** Get the Codex config directory (~/.codex or CODEX_HOME/CODEX_DIR) */
+export function getCodexDir(): string;
+
+/** Get the sessions directory (<config>/sessions) */
 export function getSessionsDir(): string;
 
-/** Get the learned skills directory (~/.claude/skills/learned) */
+/** Get the learned skills directory (<config>/skills/learned) */
 export function getLearnedSkillsDir(): string;
 
 /** Get the temp directory (cross-platform) */
@@ -48,7 +51,7 @@ export function getDateTimeString(): string;
 // --- Session/Project ---
 
 /**
- * Get short session ID from CLAUDE_SESSION_ID environment variable.
+ * Get short session ID from CODEX_SESSION_ID.
  * Returns last 8 characters, falls back to project name then the provided fallback.
  */
 export function getSessionIdShort(fallback?: string): string;
@@ -145,10 +148,10 @@ export interface ReadStdinJsonOptions {
  */
 export function readStdinJson(options?: ReadStdinJsonOptions): Promise<Record<string, unknown>>;
 
-/** Log a message to stderr (visible to user in Claude Code terminal) */
+/** Log a message to stderr (visible to user in Codex/Claude terminal) */
 export function log(message: string): void;
 
-/** Output data to stdout (returned to Claude's context) */
+/** Output data to stdout (returned to Codex/Claude context) */
 export function output(data: string | Record<string, unknown>): void;
 
 // --- System ---

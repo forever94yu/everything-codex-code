@@ -1,5 +1,5 @@
 /**
- * Cross-platform utility functions for Claude Code hooks and scripts
+ * Cross-platform utility functions for Codex/Claude hooks and scripts
  * Works on Windows, macOS, and Linux
  */
 
@@ -21,24 +21,48 @@ function getHomeDir() {
 }
 
 /**
- * Get the Claude config directory
+ * Resolve the active config directory.
+ *
+ * Priority:
+ * 1. CODEX_DIR (explicit override)
+ * 2. Existing ~/.codex
+ * 3. Default ~/.codex
  */
-function getClaudeDir() {
-  return path.join(getHomeDir(), '.claude');
+function getConfigDir() {
+  const codexDirFromEnv = process.env.CODEX_DIR;
+  if (codexDirFromEnv && codexDirFromEnv.trim()) {
+    return codexDirFromEnv.trim();
+  }
+
+  const home = getHomeDir();
+  const codexDir = process.env.CODEX_HOME && process.env.CODEX_HOME.trim()
+    ? process.env.CODEX_HOME.trim()
+    : path.join(home, '.codex');
+
+  if (fs.existsSync(codexDir)) return codexDir;
+
+  return codexDir;
+}
+
+/**
+ * Get the Codex config directory
+ */
+function getCodexDir() {
+  return getConfigDir();
 }
 
 /**
  * Get the sessions directory
  */
 function getSessionsDir() {
-  return path.join(getClaudeDir(), 'sessions');
+  return path.join(getConfigDir(), 'sessions');
 }
 
 /**
  * Get the learned skills directory
  */
 function getLearnedSkillsDir() {
-  return path.join(getClaudeDir(), 'skills', 'learned');
+  return path.join(getConfigDir(), 'skills', 'learned');
 }
 
 /**
@@ -108,11 +132,11 @@ function getProjectName() {
 }
 
 /**
- * Get short session ID from CLAUDE_SESSION_ID environment variable
+ * Get short session ID from CODEX_SESSION_ID environment variable
  * Returns last 8 characters, falls back to project name then 'default'
  */
 function getSessionIdShort(fallback = 'default') {
-  const sessionId = process.env.CLAUDE_SESSION_ID;
+  const sessionId = process.env.CODEX_SESSION_ID;
   if (sessionId && sessionId.length > 0) {
     return sessionId.slice(-8);
   }
@@ -260,14 +284,14 @@ async function readStdinJson(options = {}) {
 }
 
 /**
- * Log to stderr (visible to user in Claude Code)
+ * Log to stderr (visible to user in Codex/Claude)
  */
 function log(message) {
   console.error(message);
 }
 
 /**
- * Output to stdout (returned to Claude)
+ * Output to stdout (returned to Codex/Claude)
  */
 function output(data) {
   if (typeof data === 'object') {
@@ -491,7 +515,8 @@ module.exports = {
 
   // Directories
   getHomeDir,
-  getClaudeDir,
+  getConfigDir,
+  getCodexDir,
   getSessionsDir,
   getLearnedSkillsDir,
   getTempDir,

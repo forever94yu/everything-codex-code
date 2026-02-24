@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Release script for bumping plugin version
+# Release script for bumping package version
 # Usage: ./scripts/release.sh VERSION
 
 VERSION="${1:-}"
-PLUGIN_JSON=".claude-plugin/plugin.json"
+PACKAGE_JSON="package.json"
 
 # Function to show usage
 usage() {
@@ -39,32 +39,32 @@ if ! git diff --quiet || ! git diff --cached --quiet; then
   exit 1
 fi
 
-# Verify plugin.json exists
-if [[ ! -f "$PLUGIN_JSON" ]]; then
-  echo "Error: $PLUGIN_JSON not found"
+# Verify package.json exists
+if [[ ! -f "$PACKAGE_JSON" ]]; then
+  echo "Error: $PACKAGE_JSON not found"
   exit 1
 fi
 
 # Read current version
-OLD_VERSION=$(grep -oE '"version": *"[^"]*"' "$PLUGIN_JSON" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+OLD_VERSION=$(grep -oE '"version": *"[^"]*"' "$PACKAGE_JSON" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
 if [[ -z "$OLD_VERSION" ]]; then
-  echo "Error: Could not extract current version from $PLUGIN_JSON"
+  echo "Error: Could not extract current version from $PACKAGE_JSON"
   exit 1
 fi
 echo "Bumping version: $OLD_VERSION -> $VERSION"
 
-# Update version in plugin.json (cross-platform sed, pipe-delimiter avoids issues with slashes)
+# Update version in package.json (cross-platform sed, pipe-delimiter avoids issues with slashes)
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # macOS
-  sed -i '' "s|\"version\": *\"[^\"]*\"|\"version\": \"$VERSION\"|" "$PLUGIN_JSON"
+  sed -i '' "s|\"version\": *\"[^\"]*\"|\"version\": \"$VERSION\"|" "$PACKAGE_JSON"
 else
   # Linux
-  sed -i "s|\"version\": *\"[^\"]*\"|\"version\": \"$VERSION\"|" "$PLUGIN_JSON"
+  sed -i "s|\"version\": *\"[^\"]*\"|\"version\": \"$VERSION\"|" "$PACKAGE_JSON"
 fi
 
 # Stage, commit, tag, and push
-git add "$PLUGIN_JSON"
-git commit -m "chore: bump plugin version to $VERSION"
+git add "$PACKAGE_JSON"
+git commit -m "chore: bump package version to $VERSION"
 git tag "v$VERSION"
 git push origin main "v$VERSION"
 

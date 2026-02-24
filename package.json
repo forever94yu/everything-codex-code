@@ -1,61 +1,44 @@
 {
-  "name": "ecc-universal",
-  "version": "1.4.1",
-  "description": "Complete collection of battle-tested Claude Code configs — agents, skills, hooks, commands, and rules evolved over 10+ months of intensive daily use by an Anthropic hackathon winner",
+  "name": "everything-codex-code",
+  "version": "1.4.1-codex.0",
+  "description": "Complete collection of battle-tested Codex configs: agents, skills, hooks, commands, and rules.",
   "keywords": [
-    "claude-code",
+    "codex",
+    "openai",
     "ai",
     "agents",
     "skills",
     "hooks",
     "mcp",
     "rules",
-    "claude",
-    "anthropic",
     "tdd",
     "code-review",
     "security",
     "automation",
-    "best-practices",
-    "cursor",
-    "cursor-ide",
-    "opencode"
+    "best-practices"
   ],
   "author": {
-    "name": "Affaan Mustafa",
-    "url": "https://x.com/affaanmustafa"
+    "name": "Affaan Mustafa"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/affaan-m/everything-claude-code.git"
+    "url": "git+https://github.com/your-github-username/everything-codex-code.git"
   },
-  "homepage": "https://github.com/affaan-m/everything-claude-code#readme",
+  "homepage": "https://github.com/your-github-username/everything-codex-code#readme",
   "bugs": {
-    "url": "https://github.com/affaan-m/everything-claude-code/issues"
+    "url": "https://github.com/your-github-username/everything-codex-code/issues"
   },
   "files": [
-    ".cursor/",
-    ".opencode/commands/",
-    ".opencode/instructions/",
-    ".opencode/plugins/",
-    ".opencode/prompts/",
-    ".opencode/tools/",
-    ".opencode/index.ts",
-    ".opencode/opencode.json",
-    ".opencode/package.json",
-    ".opencode/tsconfig.json",
-    ".opencode/MIGRATION.md",
-    ".opencode/README.md",
+    ".codex/",
+    "AGENTS.md",
     "agents/",
     "commands/",
     "contexts/",
-    "examples/CLAUDE.md",
-    "examples/user-CLAUDE.md",
-    "examples/statusline.json",
+    "examples/AGENTS.md",
+    "examples/user-AGENTS.md",
     "hooks/",
     "mcp-configs/",
-    "plugins/",
     "rules/",
     "schemas/",
     "scripts/ci/",
@@ -64,16 +47,16 @@
     "scripts/setup-package-manager.js",
     "scripts/skill-create-output.js",
     "skills/",
-    ".claude-plugin/plugin.json",
-    ".claude-plugin/README.md",
     "install.sh",
-    "llms.txt"
+    "README.codex.zh-CN.md",
+    "README.md",
+    "LICENSE"
   ],
   "bin": {
-    "ecc-install": "install.sh"
+    "eccx-install": "install.sh"
   },
   "scripts": {
-    "postinstall": "echo '\\n  ecc-universal installed!\\n  Run: npx ecc-install typescript\\n  Docs: https://github.com/affaan-m/everything-claude-code\\n'",
+    "postinstall": "echo '\\n  everything-codex-code installed!\\n  Run: npx eccx-install typescript\\n'",
     "lint": "eslint . && markdownlint '**/*.md' --ignore node_modules",
     "test": "node scripts/ci/validate-agents.js && node scripts/ci/validate-commands.js && node scripts/ci/validate-rules.js && node scripts/ci/validate-skills.js && node scripts/ci/validate-hooks.js && node tests/run-all.js"
   },
