@@ -16,17 +16,21 @@ Includes:
 ```bash
 git clone <your-repo-url> everything-codex-code
 cd everything-codex-code
-./install.sh typescript
+npm install
+npx eccx-install typescript
 ```
 
 Common options:
 
 ```bash
 # Multi-language install
-./install.sh typescript python golang
+npx eccx-install typescript python golang
 
 # Explicit Codex target (same behavior)
-./install.sh --target codex typescript
+npx eccx-install --target codex typescript
+
+# Optional shell installer (Unix-like environments)
+./install.sh typescript
 ```
 
 ## Install Locations

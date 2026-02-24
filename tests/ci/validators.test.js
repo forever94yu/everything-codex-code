@@ -1971,9 +1971,21 @@ function runTests() {
     // Create one valid skill directory and one broken symlink
     const validSkill = path.join(skillsDir, 'valid-skill');
     fs.mkdirSync(validSkill, { recursive: true });
-    // Broken symlink: target does not exist — statSync will throw ENOENT
+    // Broken symlink: target does not exist — statSync will throw ENOENT.
+    // On some Windows setups this needs extra privileges, so skip if unavailable.
     const brokenLink = path.join(skillsDir, 'broken-skill');
-    fs.symlinkSync('/nonexistent/target/path', brokenLink);
+    try {
+      fs.symlinkSync('/nonexistent/target/path', brokenLink);
+    } catch (err) {
+      if (err && (err.code === 'EPERM' || err.code === 'EACCES' || err.code === 'EINVAL')) {
+        console.log('    (skipped — symlink creation not permitted on this platform)');
+        cleanupTestDir(testDir);
+        cleanupTestDir(agentsDir);
+        fs.rmSync(skillsDir, { recursive: true, force: true });
+        return true;
+      }
+      throw err;
+    }
 
     // Command that references the valid skill (should resolve)
     fs.writeFileSync(path.join(testDir, 'cmd.md'),

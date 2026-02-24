@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Integration tests for hook scripts
  *
  * Tests hook behavior in realistic scenarios with proper input/output handling.
@@ -16,10 +16,10 @@ const { spawn } = require('child_process');
 function _test(name, fn) {
   try {
     fn();
-    console.log(`  ✓ ${name}`);
+    console.log(`  鉁?${name}`);
     return true;
   } catch (err) {
-    console.log(`  ✗ ${name}`);
+    console.log(`  鉁?${name}`);
     console.log(`    Error: ${err.message}`);
     return false;
   }
@@ -29,10 +29,10 @@ function _test(name, fn) {
 async function asyncTest(name, fn) {
   try {
     await fn();
-    console.log(`  ✓ ${name}`);
+    console.log(`  鉁?${name}`);
     return true;
   } catch (err) {
-    console.log(`  ✗ ${name}`);
+    console.log(`  鉁?${name}`);
     console.log(`    Error: ${err.message}`);
     return false;
   }
@@ -237,7 +237,7 @@ async function runTests() {
   })) passed++; else failed++;
 
   if (await asyncTest('blocking hooks output BLOCKED message', async () => {
-    // Test the dev server blocking hook — must send a matching command
+    // Test the dev server blocking hook 鈥?must send a matching command
     const blockingCommand = hooks.hooks.PreToolUse[0].hooks[0].command;
     const match = blockingCommand.match(/^node -e "(.+)"$/s);
 
@@ -335,7 +335,7 @@ async function runTests() {
 
   if (await asyncTest('suggest-compact increments and triggers at threshold', async () => {
     const sessionId = 'integration-test-' + Date.now();
-    const counterFile = path.join(os.tmpdir(), `claude-tool-count-${sessionId}`);
+    const counterFile = path.join(os.tmpdir(), `codex-tool-count-${sessionId}`);
 
     try {
       // Set counter just below threshold
@@ -344,7 +344,7 @@ async function runTests() {
       const result = await runHookWithInput(
         path.join(scriptsDir, 'suggest-compact.js'),
         {},
-        { CLAUDE_SESSION_ID: sessionId, COMPACT_THRESHOLD: '50' }
+        { CODEX_SESSION_ID: sessionId, COMPACT_THRESHOLD: '50' }
       );
 
       assert.ok(
@@ -451,7 +451,7 @@ async function runTests() {
       assert.ok(result.stderr.includes('[SessionEnd]'), 'Should have SessionEnd log');
 
       // Verify a session file was created
-      const sessionsDir = path.join(testDir, '.claude', 'sessions');
+      const sessionsDir = path.join(testDir, '.codex', 'sessions');
       if (fs.existsSync(sessionsDir)) {
         const files = fs.readdirSync(sessionsDir).filter(f => f.endsWith('.tmp'));
         assert.ok(files.length > 0, 'Should create a session file');
@@ -521,7 +521,7 @@ async function runTests() {
       assert.strictEqual(result.code, 0, 'Should exit 0');
 
       // Check session file was created
-      const sessionsDir = path.join(testDir, '.claude', 'sessions');
+      const sessionsDir = path.join(testDir, '.codex', 'sessions');
       if (fs.existsSync(sessionsDir)) {
         const files = fs.readdirSync(sessionsDir).filter(f => f.endsWith('.tmp'));
         assert.ok(files.length > 0, 'Should create session file');
@@ -712,3 +712,4 @@ async function runTests() {
 }
 
 runTests();
+
