@@ -6,7 +6,7 @@ model: haiku
 
 # Observer Agent
 
-A background agent that analyzes observations from Claude Code sessions to detect patterns and create instincts.
+A background agent that analyzes observations from Codex Code sessions to detect patterns and create instincts.
 
 ## When to Run
 
@@ -17,8 +17,8 @@ A background agent that analyzes observations from Claude Code sessions to detec
 ## Input
 
 Reads observations from the **project-scoped** observations file:
-- Project: `~/.claude/homunculus/projects/<project-hash>/observations.jsonl`
-- Global fallback: `~/.claude/homunculus/observations.jsonl`
+- Project: `~/.codex/homunculus/projects/<project-hash>/observations.jsonl`
+- Global fallback: `~/.codex/homunculus/observations.jsonl`
 
 ```jsonl
 {"timestamp":"2025-01-22T10:30:00Z","event":"tool_start","session":"abc123","tool":"Edit","input":"...","project_id":"a1b2c3d4e5f6","project_name":"my-react-app"}
@@ -32,7 +32,7 @@ Reads observations from the **project-scoped** observations file:
 Look for these patterns in observations:
 
 ### 1. User Corrections
-When a user's follow-up message corrects Claude's previous action:
+When a user's follow-up message corrects Codex's previous action:
 - "No, use X instead of Y"
 - "Actually, I meant..."
 - Immediate undo/redo patterns
@@ -66,8 +66,8 @@ When certain tools are consistently preferred:
 ## Output
 
 Creates/updates instincts in the **project-scoped** instincts directory:
-- Project: `~/.claude/homunculus/projects/<project-hash>/instincts/personal/`
-- Global: `~/.claude/homunculus/instincts/personal/` (for universal patterns)
+- Project: `~/.codex/homunculus/projects/<project-hash>/instincts/personal/`
+- Global: `~/.codex/homunculus/instincts/personal/` (for universal patterns)
 
 ### Project-Scoped Instinct (default)
 

@@ -31,7 +31,7 @@ from typing import Optional
 # Configuration
 # ─────────────────────────────────────────────
 
-HOMUNCULUS_DIR = Path.home() / ".claude" / "homunculus"
+HOMUNCULUS_DIR = Path.home() / ".codex" / "homunculus"
 PROJECTS_DIR = HOMUNCULUS_DIR / "projects"
 REGISTRY_FILE = HOMUNCULUS_DIR / "projects.json"
 
@@ -107,8 +107,8 @@ def detect_project() -> dict:
     """Detect current project context. Returns dict with id, name, root, project_dir."""
     project_root = None
 
-    # 1. CLAUDE_PROJECT_DIR env var
-    env_dir = os.environ.get("CLAUDE_PROJECT_DIR")
+    # 1. CODEX_PROJECT_DIR env var
+    env_dir = os.environ.get("CODEX_PROJECT_DIR")
     if env_dir and os.path.isdir(env_dir):
         project_root = env_dir
 
@@ -965,7 +965,7 @@ def cmd_projects(args) -> int:
 
     if not registry:
         print("No projects registered yet.")
-        print("Projects are auto-detected when you use Claude Code in a git repo.")
+        print("Projects are auto-detected when you use Codex Code in a git repo.")
         return 0
 
     print(f"\n{'='*60}")

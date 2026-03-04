@@ -14,12 +14,12 @@
 #   PROJECT_ID, PROJECT_NAME, PROJECT_ROOT, PROJECT_DIR
 #
 # Detection priority:
-#   1. CLAUDE_PROJECT_DIR env var (if set)
+#   1. CODEX_PROJECT_DIR env var (if set)
 #   2. git remote URL (hashed for uniqueness across machines)
 #   3. git repo root path (fallback, machine-specific)
 #   4. "global" (no project context detected)
 
-_CLV2_HOMUNCULUS_DIR="${HOME}/.claude/homunculus"
+_CLV2_HOMUNCULUS_DIR="${HOME}/.codex/homunculus"
 _CLV2_PROJECTS_DIR="${_CLV2_HOMUNCULUS_DIR}/projects"
 _CLV2_REGISTRY_FILE="${_CLV2_HOMUNCULUS_DIR}/projects.json"
 
@@ -29,9 +29,9 @@ _clv2_detect_project() {
   local project_id=""
   local source_hint=""
 
-  # 1. Try CLAUDE_PROJECT_DIR env var
-  if [ -n "$CLAUDE_PROJECT_DIR" ] && [ -d "$CLAUDE_PROJECT_DIR" ]; then
-    project_root="$CLAUDE_PROJECT_DIR"
+  # 1. Try CODEX_PROJECT_DIR env var
+  if [ -n "$CODEX_PROJECT_DIR" ] && [ -d "$CODEX_PROJECT_DIR" ]; then
+    project_root="$CODEX_PROJECT_DIR"
     source_hint="env"
   fi
 

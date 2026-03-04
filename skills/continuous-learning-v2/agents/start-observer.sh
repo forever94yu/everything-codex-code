@@ -15,7 +15,7 @@
 set -e
 
 # NOTE: set -e is disabled inside the background subshell below
-# to prevent claude CLI failures from killing the observer loop.
+# to prevent codex CLI failures from killing the observer loop.
 
 # ─────────────────────────────────────────────
 # Project detection
@@ -32,7 +32,7 @@ source "${SKILL_ROOT}/scripts/detect-project.sh"
 # Configuration
 # ─────────────────────────────────────────────
 
-CONFIG_DIR="${HOME}/.claude/homunculus"
+CONFIG_DIR="${HOME}/.codex/homunculus"
 CONFIG_FILE="${SKILL_ROOT}/config.json"
 # PID file is project-scoped so each project can have its own observer
 PID_FILE="${PROJECT_DIR}/.observer.pid"
@@ -150,7 +150,7 @@ case "${1:-start}" in
       OBSERVER_INTERVAL_SECONDS="$OBSERVER_INTERVAL_SECONDS" \
       /bin/bash -c '
       set +e
-      unset CLAUDECODE
+      unset CODEXCODE
 
       SLEEP_PID=""
       USR1_FIRED=0
@@ -176,11 +176,11 @@ case "${1:-start}" in
 
         echo "[$(date)] Analyzing $obs_count observations for project ${PROJECT_NAME}..." >> "$LOG_FILE"
 
-        # Use Claude Code with Haiku to analyze observations
+        # Use Codex Code with Haiku to analyze observations
         # The prompt specifies project-scoped instinct creation
-        if command -v claude &> /dev/null; then
+        if command -v codex &> /dev/null; then
           exit_code=0
-          claude --model haiku --max-turns 3 --print \
+          codex --model haiku --max-turns 3 --print \
             "Read $OBSERVATIONS_FILE and identify patterns for the project '${PROJECT_NAME}' (user corrections, error resolutions, repeated workflows, tool preferences).
 If you find 3+ occurrences of the same pattern, create an instinct file in $INSTINCTS_DIR/<id>.md.
 
@@ -218,10 +218,10 @@ Rules:
 - Examples of project patterns: 'use React functional components', 'follow Django REST framework conventions'" \
             >> "$LOG_FILE" 2>&1 || exit_code=$?
           if [ "$exit_code" -ne 0 ]; then
-            echo "[$(date)] Claude analysis failed (exit $exit_code)" >> "$LOG_FILE"
+            echo "[$(date)] Codex analysis failed (exit $exit_code)" >> "$LOG_FILE"
           fi
         else
-          echo "[$(date)] claude CLI not found, skipping analysis" >> "$LOG_FILE"
+          echo "[$(date)] codex CLI not found, skipping analysis" >> "$LOG_FILE"
         fi
 
         if [ -f "$OBSERVATIONS_FILE" ]; then
