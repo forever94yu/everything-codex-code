@@ -45,6 +45,16 @@ npx eccx-install --target codex typescript
 - Package manager preference: `.codex/package-manager.json`
 - Environment variable override: `CODEX_PACKAGE_MANAGER`
 
+## Upstream Sync (v1.7 line)
+
+This fork now includes the latest upstream feature set adapted for Codex-only usage, including:
+
+- New commands: `/claw`, `/projects`, `/promote`
+- New automation: doc-file warning hook and project detection support
+- New rules: full `rules/swift/` suite
+- New skills: `autonomous-loops`, `plankton-code-quality`, `frontend-slides`, `article-writing`, `content-engine`, `market-research`, `investor-materials`, `investor-outreach`, `visa-doc-translate`, `swiftui-patterns`, `swift-concurrency-6-2`, `foundation-models-on-device`, `liquid-glass-design`
+- Continuous-learning-v2 updates and related tests/utilities from upstream
+
 ## Development
 
 ```bash
