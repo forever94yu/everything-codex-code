@@ -14,7 +14,7 @@ Includes:
 ## Quick Start
 
 ```bash
-git clone <your-repo-url> everything-codex-code
+git clone https://github.com/forever94yu/everything-codex-code.git
 cd everything-codex-code
 npm install
 npx eccx-install typescript
